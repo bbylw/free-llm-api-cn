@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免费 LLM API 资源</title>
+    <meta name="description" content="精选汇总各种提供免费访问或试用额度的大语言模型(LLM) API服务">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Outfit', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark': {
+                            bg: '#0a0a0f',
+                            card: '#13131a',
+                            border: '#1f1f2e',
+                            hover: '#1a1a25',
+                        },
+                        'accent': {
+                            blue: '#3b82f6',
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 滚动条 */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #2d2d3f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3d3d52; }
+        
+        /* 选中文本 */
+        ::selection { background: rgba(59, 130, 246, 0.3); color: #fff; }
+        
+        /* 焦点环 */
+        .focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* 平滑滚动 */
+        html { scroll-behavior: smooth; }
+        
+        /* 卡片悬停 */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            border-color: #2d2d3f;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 延迟动画 */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        
+        /* 表格行悬停 */
+        .table-row-hover:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-gray-200 font-body min-h-screen">
+    
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-gradient-to-br from-accent-blue to-accent-cyan rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="font-display font-700 text-xl text-white">免费 LLM API</span>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <div class="hidden sm:flex items-center gap-5 text-sm">
+                        <span class="text-gray-400">
+                            <span class="font-600 text-white">12</span> 免费提供商
+                        </span>
+                        <span class="text-gray-600">|</span>
+                        <span class="text-gray-400">
+                            <span class="font-600 text-white">13</span> 试用额度
+                        </span>
+                    </div>
+                    
+                    <a href="https://github.com/cheahjs/free-llm-api-resources" 
+                       target="_blank" 
+                       rel="noopener"
+                       class="flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-card border border-dark-border hover:border-accent-blue text-sm font-500 transition-colors focus-ring">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-br from-accent-blue/5 via-transparent to-accent-cyan/5 border-b border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <div class="max-w-3xl">
+                <h1 class="font-display text-5xl sm:text-6xl font-800 text-white mb-5 opacity-0 animate-slide-up">
+                    免费 LLM API 资源
+                </h1>
+                <p class="text-xl text-gray-400 mb-8 opacity-0 animate-slide-up delay-100">
+                    一站式发现各种提供免费访问或试用额度的大语言模型服务
+                </p>
+                
+                <div class="flex flex-wrap gap-3 opacity-0 animate-slide-up delay-200">
+                    <a href="#free-providers" class="inline-flex items-center gap-2 px-5 py-2.5 bg-dark-card rounded-lg border border-dark-border hover:border-accent-emerald text-base font-500 transition-colors">
+                        <svg class="w-5 h-5 text-accent-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        免费提供商
+                    </a>
+                    <a href="#trial-providers" class="inline-flex items-center gap-2 px-5 py-2.5 bg-dark-card rounded-lg border border-dark-border hover:border-accent-amber text-base font-500 transition-colors">
+                        <svg class="w-5 h-5 text-accent-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        试用额度
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        
+        <!-- 搜索和筛选 -->
+        <section class="mb-10 opacity-0 animate-fade-in delay-200">
+            <div class="bg-dark-card rounded-xl border border-dark-border p-5 sm:p-6">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex-1 relative">
+                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input type="text" 
+                               id="searchInput" 
+                               placeholder="搜索提供商或模型名称..."
+                               class="w-full pl-12 pr-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-gray-200 placeholder-gray-500 focus-ring text-base">
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button data-filter="all" class="filter-btn active flex-1 sm:flex-none px-6 py-3 rounded-lg font-500 transition-all focus-ring">
+                            全部
+                        </button>
+                        <button data-filter="free" class="filter-btn flex-1 sm:flex-none px-6 py-3 rounded-lg font-500 transition-all focus-ring">
+                            免费
+                        </button>
+                        <button data-filter="trial" class="filter-btn flex-1 sm:flex-none px-6 py-3 rounded-lg font-500 transition-all focus-ring">
+                            试用
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提示信息 -->
+        <section class="grid sm:grid-cols-2 gap-4 mb-10">
+            <div class="flex gap-3 p-4 bg-accent-cyan/5 border border-accent-cyan/20 rounded-lg">
+                <svg class="w-5 h-5 text-accent-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="text-sm">
+                    <p class="font-600 text-white mb-1">温馨提示</p>
+                    <p class="text-gray-400">请合理使用这些免费资源，避免滥用</p>
+                </div>
+            </div>
+            <div class="flex gap-3 p-4 bg-accent-amber/5 border border-accent-amber/20 rounded-lg">
+                <svg class="w-5 h-5 text-accent-amber flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <div class="text-sm">
+                    <p class="font-600 text-white mb-1">重要声明</p>
+                    <p class="text-gray-400">本列表仅包含官方授权的合法服务</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 免费提供商 -->
+        <section id="free-providers" class="mb-14">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-accent-emerald/10 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-accent-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-display text-2xl font-700 text-white">免费提供商</h2>
+                    <p class="text-sm text-gray-500">长期免费使用</p>
+                </div>
+            </div>
+            <div id="freeProvidersGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+                <!-- 动态生成 -->
+            </div>
+        </section>
+
+        <!-- 试用额度提供商 -->
+        <section id="trial-providers" class="mb-14">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-accent-amber/10 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-accent-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-display text-2xl font-700 text-white">试用额度提供商</h2>
+                    <p class="text-sm text-gray-500">注册赠送额度</p>
+                </div>
+            </div>
+            <div id="trialProvidersGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+                <!-- 动态生成 -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-dark-border mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+                <p>
+                    基于 <a href="https://github.com/cheahjs/free-llm-api-resources" target="_blank" rel="noopener" class="text-accent-blue hover:text-accent-cyan transition-colors">free-llm-api-resources</a> 项目
+                </p>
+                <p>© 2026 免费 LLM API 资源 · 仅供学习参考</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        // 渲染提供商卡片
+        function renderProviderCard(provider, type, index) {
+            const card = document.createElement('article');
+            card.className = 'provider-card bg-dark-card rounded-xl border border-dark-border p-5 card-hover opacity-0';
+            card.style.animationDelay = `${index * 0.05}s`;
+            card.style.animation = 'slideUp 0.5s ease-out forwards';
+            card.dataset.type = type;
+            card.dataset.name = provider.name.toLowerCase();
+
+            // 头部
+            const header = document.createElement('div');
+            header.className = 'flex items-start justify-between gap-3 mb-4';
+            
+            const nameLink = document.createElement('a');
+            nameLink.className = 'font-display text-lg font-600 text-white hover:text-accent-blue transition-colors';
+            nameLink.href = provider.url;
+            nameLink.target = '_blank';
+            nameLink.rel = 'noopener noreferrer';
+            nameLink.textContent = provider.name;
+            
+            const badge = document.createElement('span');
+            badge.className = `flex-shrink-0 px-3 py-1 rounded-md text-sm font-600 ${
+                provider.badge === 'free' 
+                    ? 'bg-accent-emerald/15 text-accent-emerald' 
+                    : 'bg-accent-amber/15 text-accent-amber'
+            }`;
+            badge.textContent = provider.badge === 'free' ? '免费' : '试用';
+            
+            header.appendChild(nameLink);
+            header.appendChild(badge);
+            card.appendChild(header);
+
+            // 额度/限制信息
+            if (provider.credits) {
+                const div = document.createElement('div');
+                div.className = 'mb-4 p-3 bg-dark-bg rounded-lg border-l-2 border-accent-amber';
+                div.innerHTML = `
+                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider mb-1">试用额度</div>
+                    <div class="text-sm text-gray-300">${provider.credits}</div>
+                `;
+                card.appendChild(div);
+            }
+
+            if (provider.limits) {
+                const div = document.createElement('div');
+                div.className = 'mb-4 p-3 bg-dark-bg rounded-lg border-l-2 border-accent-emerald';
+                const content = provider.limitsUrl 
+                    ? `<a href="${provider.limitsUrl}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">${provider.limits}</a>`
+                    : provider.limits;
+                div.innerHTML = `
+                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider mb-1">使用限制</div>
+                    <div class="text-sm text-gray-300 leading-relaxed">${content}</div>
+                `;
+                card.appendChild(div);
+            }
+
+            // 限制表格 - 折叠展示
+            if (provider.limitsTable) {
+                const div = document.createElement('div');
+                div.className = 'mb-4 overflow-hidden rounded-lg border border-dark-border';
+                
+                const maxRows = 3;
+                const displayRows = provider.limitsTable.slice(0, maxRows);
+                const hiddenRows = provider.limitsTable.slice(maxRows);
+                const hasMore = hiddenRows.length > 0;
+                
+                let tableHTML = `
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="bg-dark-bg">
+                                    <th class="text-left py-2.5 px-3 font-600 text-gray-400">模型</th>
+                                    <th class="text-left py-2.5 px-3 font-600 text-gray-400">限制</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-dark-border">
+                `;
+                
+                displayRows.forEach((row) => {
+                    const modelName = row.url 
+                        ? `<a href="${row.url}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">${row.model}</a>`
+                        : row.model;
+                    tableHTML += `
+                        <tr class="table-row-hover transition-colors">
+                            <td class="py-2.5 px-3 text-gray-300">${modelName}</td>
+                            <td class="py-2.5 px-3 text-gray-400">${row.limits}</td>
+                        </tr>
+                    `;
+                });
+                
+                tableHTML += '</tbody></table></div>';
+                div.innerHTML = tableHTML;
+                
+                if (hasMore) {
+                    const tbody = div.querySelector('tbody');
+                    
+                    const expandBtn = document.createElement('tr');
+                    expandBtn.className = 'cursor-pointer hover:bg-dark-hover transition-colors';
+                    expandBtn.innerHTML = `
+                        <td colspan="2" class="py-2.5 px-3 text-center">
+                            <button class="text-accent-blue text-sm font-500 hover:text-accent-cyan transition-colors inline-flex items-center gap-1">
+                                <span class="expand-text">查看全部 ${provider.limitsTable.length} 个模型</span>
+                                <svg class="expand-icon w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                        </td>
+                    `;
+                    
+                    let isExpanded = false;
+                    const hiddenRowsElements = [];
+                    
+                    expandBtn.onclick = function() {
+                        isExpanded = !isExpanded;
+                        
+                        if (isExpanded) {
+                            hiddenRows.forEach((row, index) => {
+                                const modelName = row.url 
+                                    ? `<a href="${row.url}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">${row.model}</a>`
+                                    : row.model;
+                                
+                                const tr = document.createElement('tr');
+                                tr.className = 'table-row-hover transition-colors hidden-row';
+                                tr.style.opacity = '0';
+                                tr.innerHTML = `
+                                    <td class="py-2.5 px-3 text-gray-300">${modelName}</td>
+                                    <td class="py-2.5 px-3 text-gray-400">${row.limits}</td>
+                                `;
+                                
+                                tbody.insertBefore(tr, expandBtn);
+                                hiddenRowsElements.push(tr);
+                                
+                                setTimeout(() => {
+                                    tr.style.transition = 'opacity 0.2s ease';
+                                    tr.style.opacity = '1';
+                                }, index * 30);
+                            });
+                            
+                            this.querySelector('.expand-text').textContent = '收起';
+                            this.querySelector('.expand-icon').style.transform = 'rotate(180deg)';
+                        } else {
+                            hiddenRowsElements.forEach(tr => {
+                                tr.style.opacity = '0';
+                                setTimeout(() => tr.remove(), 200);
+                            });
+                            hiddenRowsElements.length = 0;
+                            
+                            this.querySelector('.expand-text').textContent = `查看全部 ${provider.limitsTable.length} 个模型`;
+                            this.querySelector('.expand-icon').style.transform = 'rotate(0deg)';
+                        }
+                    };
+                    
+                    tbody.appendChild(expandBtn);
+                }
+                
+                card.appendChild(div);
+            }
+
+            // 备注 - 支持折叠
+            if (provider.notes) {
+                const div = document.createElement('div');
+                div.className = 'mb-4 p-3 bg-accent-cyan/5 border border-accent-cyan/15 rounded-lg text-sm text-gray-400 flex items-start gap-2';
+                
+                const notesContent = provider.notes;
+                const maxChars = 100;
+                const needsCollapse = notesContent.length > maxChars;
+                
+                if (needsCollapse) {
+                    const shortNotes = notesContent.substring(0, maxChars) + '...';
+                    
+                    div.innerHTML = `
+                        <svg class="w-4 h-4 text-accent-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div class="flex-1">
+                            <span class="notes-text">${shortNotes}</span>
+                            <button class="notes-toggle text-accent-cyan hover:text-accent-blue font-500 ml-1 transition-colors">
+                                展开
+                            </button>
+                        </div>
+                    `;
+                    
+                    let isExpanded = false;
+                    const notesText = div.querySelector('.notes-text');
+                    const toggleBtn = div.querySelector('.notes-toggle');
+                    
+                    toggleBtn.onclick = function() {
+                        isExpanded = !isExpanded;
+                        if (isExpanded) {
+                            notesText.textContent = notesContent;
+                            this.textContent = '收起';
+                        } else {
+                            notesText.textContent = shortNotes;
+                            this.textContent = '展开';
+                        }
+                    };
+                } else {
+                    div.innerHTML = `
+                        <svg class="w-4 h-4 text-accent-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>${notesContent}</span>
+                    `;
+                }
+                
+                card.appendChild(div);
+            }
+
+            // 模型列表 - 折叠展示
+            if (provider.models && provider.models.length > 0) {
+                const div = document.createElement('div');
+                div.className = 'models-section';
+                
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'flex items-center justify-between mb-3';
+                titleDiv.innerHTML = `
+                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider">
+                        支持模型 <span class="text-accent-blue">(${provider.models.length})</span>
+                    </div>
+                `;
+                
+                const list = document.createElement('div');
+                list.className = 'models-list flex flex-wrap gap-2';
+                
+                const maxVisible = 3;
+                const displayModels = provider.models.slice(0, maxVisible);
+                const hiddenModels = provider.models.slice(maxVisible);
+                const hasMore = hiddenModels.length > 0;
+                
+                displayModels.forEach(model => {
+                    const tag = document.createElement('span');
+                    tag.className = 'px-3 py-1.5 bg-dark-bg rounded-md text-sm text-gray-400 cursor-default transition-colors hover:text-gray-300';
+                    if (model.url) {
+                        tag.innerHTML = `<a href="${model.url}" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">${model.name}</a>`;
+                    } else {
+                        tag.textContent = model.name;
+                    }
+                    list.appendChild(tag);
+                });
+                
+                if (hasMore) {
+                    const btn = document.createElement('button');
+                    btn.className = 'px-3 py-1.5 bg-accent-blue/10 rounded-md text-sm text-accent-blue font-500 hover:bg-accent-blue/20 transition-colors';
+                    btn.innerHTML = `
+                        <span class="expand-text">+${hiddenModels.length} 更多</span>
+                    `;
+                    
+                    let isExpanded = false;
+                    const hiddenTags = [];
+                    
+                    btn.onclick = function() {
+                        isExpanded = !isExpanded;
+                        
+                        if (isExpanded) {
+                            hiddenModels.forEach(model => {
+                                const tag = document.createElement('span');
+                                tag.className = 'px-3 py-1.5 bg-dark-bg rounded-md text-sm text-gray-400 cursor-default transition-colors hover:text-gray-300';
+                                if (model.url) {
+                                    tag.innerHTML = `<a href="${model.url}" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">${model.name}</a>`;
+                                } else {
+                                    tag.textContent = model.name;
+                                }
+                                tag.style.opacity = '0';
+                                list.appendChild(tag);
+                                hiddenTags.push(tag);
+                                
+                                setTimeout(() => {
+                                    tag.style.transition = 'opacity 0.2s ease';
+                                    tag.style.opacity = '1';
+                                }, 10);
+                            });
+                            
+                            this.querySelector('.expand-text').textContent = '收起';
+                        } else {
+                            hiddenTags.forEach(tag => {
+                                tag.style.opacity = '0';
+                                setTimeout(() => tag.remove(), 200);
+                            });
+                            hiddenTags.length = 0;
+                            
+                            this.querySelector('.expand-text').textContent = `+${hiddenModels.length} 更多`;
+                        }
+                    };
+                    
+                    list.appendChild(btn);
+                }
+                
+                div.appendChild(titleDiv);
+                div.appendChild(list);
+                card.appendChild(div);
+            }
+
+            // 模型链接
+            if (provider.modelsLink) {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider mb-2">支持模型</div>
+                    <a href="${provider.modelsLink.url || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 bg-dark-bg rounded-md text-sm text-accent-blue hover:text-accent-cyan transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                        ${provider.modelsLink.text}
+                    </a>
+                `;
+                card.appendChild(div);
+            }
+
+            return card;
+        }
+
+        // 渲染所有提供商
+        function renderProviders() {
+            const freeGrid = document.getElementById('freeProvidersGrid');
+            const trialGrid = document.getElementById('trialProvidersGrid');
+            
+            freeGrid.innerHTML = '';
+            trialGrid.innerHTML = '';
+            
+            providersData.free.forEach((provider, index) => {
+                freeGrid.appendChild(renderProviderCard(provider, 'free', index));
+            });
+            
+            providersData.trial.forEach((provider, index) => {
+                trialGrid.appendChild(renderProviderCard(provider, 'trial', index));
+            });
+        }
+
+        // 搜索功能
+        function handleSearch(searchTerm) {
+            const cards = document.querySelectorAll('.provider-card');
+            const term = searchTerm.toLowerCase().trim();
+            
+            cards.forEach(card => {
+                const name = card.dataset.name;
+                const text = card.textContent.toLowerCase();
+                
+                card.style.display = (term === '' || name.includes(term) || text.includes(term)) ? '' : 'none';
+            });
+        }
+
+        // 筛选功能
+        function handleFilter(filterType) {
+            const freeSection = document.getElementById('free-providers');
+            const trialSection = document.getElementById('trial-providers');
+            
+            freeSection.style.display = filterType === 'trial' ? 'none' : '';
+            trialSection.style.display = filterType === 'free' ? 'none' : '';
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProviders();
+            
+            const searchInput = document.getElementById('searchInput');
+            let debounceTimer;
+            
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => handleSearch(e.target.value), 200);
+            });
+            
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => {
+                        b.classList.remove('active', 'bg-accent-blue', 'text-white');
+                        b.classList.add('bg-dark-bg', 'text-gray-400');
+                    });
+                    this.classList.add('active', 'bg-accent-blue', 'text-white');
+                    this.classList.remove('bg-dark-bg', 'text-gray-400');
+                    handleFilter(this.dataset.filter);
+                });
+            });
+            
+            // 设置初始状态
+            filterButtons.forEach(btn => {
+                if (btn.classList.contains('active')) {
+                    btn.classList.add('bg-accent-blue', 'text-white');
+                    btn.classList.remove('bg-dark-bg', 'text-gray-400');
+                } else {
+                    btn.classList.add('bg-dark-bg', 'text-gray-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
