@@ -1,41 +1,81 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="dark">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>免费 LLM API 资源</title>
+    <title>免费 LLM API 资源 | 发现最优质的免费大模型服务</title>
     <meta name="description" content="精选汇总各种提供免费访问或试用额度的大语言模型(LLM) API服务">
+    <meta name="keywords" content="LLM, API, 免费, AI, 大模型, OpenAI, Claude, Gemini">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts: JetBrains Mono (Display/Mono) + Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        'display': ['Outfit', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
                         'body': ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'dark': {
-                            bg: '#0a0a0f',
-                            card: '#13131a',
-                            border: '#1f1f2e',
-                            hover: '#1a1a25',
+                        // Industrial Sci-Fi palette
+                        'void': {
+                            DEFAULT: '#050508',
+                            50: '#0a0a10',
+                            100: '#0f0f18',
+                            200: '#141420',
+                            300: '#1a1a2a',
                         },
-                        'accent': {
-                            blue: '#3b82f6',
-                            cyan: '#06b6d4',
-                            emerald: '#10b981',
-                            amber: '#f59e0b',
+                        'neon': {
+                            cyan: '#00f5ff',
+                            green: '#00ff88',
+                            amber: '#ffaa00',
+                            red: '#ff3366',
+                            purple: '#bf5af2',
+                        },
+                        'steel': {
+                            100: '#e4e4e7',
+                            200: '#a1a1aa',
+                            300: '#71717a',
+                            400: '#52525b',
+                            500: '#3f3f46',
+                            600: '#27272a',
                         }
                     },
                     animation: {
+                        'scan-line': 'scanLine 8s linear infinite',
+                        'pulse-neon': 'pulseNeon 2s ease-in-out infinite',
+                        'glitch': 'glitch 0.3s ease-in-out',
+                        'typing': 'typing 1s steps(20) infinite',
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
                         'slide-up': 'slideUp 0.5s ease-out forwards',
                     },
                     keyframes: {
+                        scanLine: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100vh)' },
+                        },
+                        pulseNeon: {
+                            '0%, 100%': { opacity: '1', filter: 'brightness(1)' },
+                            '50%': { opacity: '0.8', filter: 'brightness(1.3)' },
+                        },
+                        glitch: {
+                            '0%, 100%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-2px, 2px)' },
+                            '40%': { transform: 'translate(-2px, -2px)' },
+                            '60%': { transform: 'translate(2px, 2px)' },
+                            '80%': { transform: 'translate(2px, -2px)' },
+                        },
+                        typing: {
+                            '0%, 100%': { borderRightColor: 'transparent' },
+                            '50%': { borderRightColor: '#00f5ff' },
+                        },
                         fadeIn: {
                             '0%': { opacity: '0' },
                             '100%': { opacity: '1' },
@@ -49,323 +89,751 @@
             }
         }
     </script>
+    
     <style>
-        /* 滚动条 */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0f; }
-        ::-webkit-scrollbar-thumb { background: #2d2d3f; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3d3d52; }
-        
-        /* 选中文本 */
-        ::selection { background: rgba(59, 130, 246, 0.3); color: #fff; }
-        
-        /* 焦点环 */
-        .focus-ring:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        /* ===== Base Reset ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
         
-        /* 平滑滚动 */
-        html { scroll-behavior: smooth; }
+        ::selection {
+            background: rgba(0, 245, 255, 0.3);
+            color: #fff;
+        }
         
-        /* 卡片悬停 */
-        .card-hover {
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #050508;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* ===== Scrollbar - Industrial ===== */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f5ff;
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ff88;
+        }
+        
+        /* ===== Scan Line Effect ===== */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00f5ff, transparent);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scanLine 8s linear infinite;
+        }
+        
+        /* ===== Grid Background ===== */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .grid-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 245, 255, 0.1) 0%, transparent 60%);
+        }
+        
+        /* ===== Noise Overlay ===== */
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        
+        /* ===== Neon Text ===== */
+        .neon-text {
+            color: #00f5ff;
+            text-shadow: 0 0 10px rgba(0, 245, 255, 0.5), 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+        
+        .neon-text-green {
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .neon-text-amber {
+            color: #ffaa00;
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.5), 0 0 20px rgba(255, 170, 0, 0.3);
+        }
+        
+        /* ===== Industrial Card ===== */
+        .industrial-card {
+            background: linear-gradient(135deg, rgba(10, 10, 16, 0.9), rgba(15, 15, 24, 0.9));
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            position: relative;
             transition: all 0.3s ease;
         }
-        .card-hover:hover {
-            transform: translateY(-2px);
-            border-color: #2d2d3f;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        
+        .industrial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        /* 延迟动画 */
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
+        .industrial-card:hover {
+            border-color: rgba(0, 245, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+        }
         
-        /* 表格行悬停 */
-        .table-row-hover:hover {
-            background: rgba(59, 130, 246, 0.05);
+        .industrial-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* ===== Corner Brackets ===== */
+        .corner-brackets {
+            position: relative;
+        }
+        
+        .corner-brackets::before,
+        .corner-brackets::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: rgba(0, 245, 255, 0.4);
+            border-style: solid;
+            transition: all 0.3s ease;
+        }
+        
+        .corner-brackets::before {
+            top: -1px;
+            left: -1px;
+            border-width: 1px 0 0 1px;
+        }
+        
+        .corner-brackets::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 1px 1px 0;
+        }
+        
+        .corner-brackets:hover::before,
+        .corner-brackets:hover::after {
+            width: 20px;
+            height: 20px;
+            border-color: #00f5ff;
+        }
+        
+        /* ===== Data Display ===== */
+        .data-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #52525b;
+        }
+        
+        .data-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: #e4e4e7;
+        }
+        
+        /* ===== Status Indicator ===== */
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: pulseNeon 2s ease-in-out infinite;
+        }
+        
+        .status-online {
+            background: #00ff88;
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
+        }
+        
+        .status-trial {
+            background: #ffaa00;
+            box-shadow: 0 0 8px rgba(255, 170, 0, 0.8);
+        }
+        
+        /* ===== Tag Styles ===== */
+        .tag-free {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+        }
+        
+        .tag-trial {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            color: #ffaa00;
+        }
+        
+        .tag-model {
+            background: rgba(0, 245, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            color: #a1a1aa;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            transition: all 0.2s ease;
+        }
+        
+        .tag-model:hover {
+            background: rgba(0, 245, 255, 0.1);
+            border-color: rgba(0, 245, 255, 0.4);
+            color: #00f5ff;
+        }
+        
+        /* ===== Button Styles ===== */
+        .btn-neon {
+            position: relative;
+            background: transparent;
+            border: 1px solid rgba(0, 245, 255, 0.5);
+            color: #00f5ff;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 245, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn-neon:hover {
+            border-color: #00f5ff;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+        
+        .btn-neon:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-neon span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-active {
+            background: rgba(0, 245, 255, 0.15);
+            border-color: #00f5ff;
+            color: #00f5ff;
+        }
+        
+        /* ===== Input Styles ===== */
+        .input-industrial {
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            color: #e4e4e7;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .input-industrial:focus {
+            outline: none;
+            border-color: #00f5ff;
+            box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.1);
+        }
+        
+        .input-industrial::placeholder {
+            color: #3f3f46;
+        }
+        
+        /* ===== Table Styles ===== */
+        .data-table {
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .data-table th {
+            background: rgba(0, 245, 255, 0.05);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #52525b;
+        }
+        
+        .data-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .data-table tr:hover td {
+            background: rgba(0, 245, 255, 0.03);
+        }
+        
+        /* ===== Section Divider ===== */
+        .divider-glow {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.3), transparent);
+        }
+        
+        /* ===== Back to Top ===== */
+        .back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* ===== Animations ===== */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        
+        /* ===== Responsive Grid ===== */
+        .provider-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (max-width: 1280px) {
+            .provider-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .provider-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== Navigation Styles ===== */
+        .nav-container {
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 245, 255, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .nav-stat {
+            background: rgba(10, 10, 16, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-stat:hover {
+            border-color: rgba(0, 245, 255, 0.3);
+            background: rgba(0, 245, 255, 0.05);
+        }
+        
+        .nav-btn {
+            background: rgba(10, 10, 16, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            border-color: rgba(0, 245, 255, 0.4);
+            background: rgba(0, 245, 255, 0.08);
         }
     </style>
 </head>
-<body class="bg-dark-bg text-gray-200 font-body min-h-screen">
+
+<body class="bg-void text-steel-100 font-body min-h-screen">
+    <!-- Scan Line Effect -->
+    <div class="scan-line"></div>
     
-    <!-- 导航栏 -->
-    <nav class="sticky top-0 z-50 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 bg-gradient-to-br from-accent-blue to-accent-cyan rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+    
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto">
+            <div class="nav-container rounded-lg px-5 py-3 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-9 h-9 rounded bg-void-100 border border-neon-cyan/30 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
+                        <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
                     </div>
-                    <span class="font-display font-700 text-xl text-white">免费 LLM API</span>
+                    <div class="hidden sm:block">
+                        <span class="font-mono font-600 text-sm text-white tracking-wider">FREE_LLM_API</span>
+                        <span class="block text-xs text-steel-500 font-mono">v2.0.26</span>
+                    </div>
+                </a>
+                
+                <!-- Stats -->
+                <div class="hidden md:flex items-center gap-3">
+                    <div class="nav-stat flex items-center gap-2 px-3 py-1.5 rounded">
+                        <div class="status-dot status-online"></div>
+                        <span class="font-mono text-sm text-white" id="freeCount">12</span>
+                        <span class="data-label">free</span>
+                    </div>
+                    <div class="nav-stat flex items-center gap-2 px-3 py-1.5 rounded">
+                        <div class="status-dot status-trial"></div>
+                        <span class="font-mono text-sm text-white" id="trialCount">13</span>
+                        <span class="data-label">trial</span>
+                    </div>
+                    <div class="nav-stat flex items-center gap-2 px-3 py-1.5 rounded">
+                        <div class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></div>
+                        <span class="font-mono text-sm text-white" id="modelCount">200+</span>
+                        <span class="data-label">models</span>
+                    </div>
                 </div>
                 
-                <div class="flex items-center gap-6">
-                    <div class="hidden sm:flex items-center gap-5 text-sm">
-                        <span class="text-gray-400">
-                            <span class="font-600 text-white">12</span> 免费提供商
-                        </span>
-                        <span class="text-gray-600">|</span>
-                        <span class="text-gray-400">
-                            <span class="font-600 text-white">13</span> 试用额度
-                        </span>
-                    </div>
-                    
-                    <a href="https://github.com/cheahjs/free-llm-api-resources" 
-                       target="_blank" 
-                       rel="noopener"
-                       class="flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-card border border-dark-border hover:border-accent-blue text-sm font-500 transition-colors focus-ring">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        <span>GitHub</span>
-                    </a>
-                </div>
+                <!-- GitHub -->
+                <a href="https://github.com/cheahjs/free-llm-api-resources" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="nav-btn flex items-center gap-2 px-3 py-1.5 rounded text-sm font-mono text-steel-300 hover:text-neon-cyan transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span class="hidden sm:inline">GITHUB</span>
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="bg-gradient-to-br from-accent-blue/5 via-transparent to-accent-cyan/5 border-b border-dark-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <header class="relative pt-28 pb-12 px-4">
+        <div class="max-w-7xl mx-auto">
             <div class="max-w-3xl">
-                <h1 class="font-display text-5xl sm:text-6xl font-800 text-white mb-5 opacity-0 animate-slide-up">
-                    免费 LLM API 资源
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-void-100 border border-neon-green/30 rounded mb-6 opacity-0 animate-slide-up">
+                    <div class="status-dot status-online"></div>
+                    <span class="font-mono text-xs text-neon-green tracking-wider">SYSTEM_ONLINE</span>
+                    <span class="text-steel-500 font-mono text-xs">// 2026.03</span>
+                </div>
+                
+                <!-- Title -->
+                <h1 class="font-mono text-4xl sm:text-5xl lg:text-6xl font-700 text-white mb-4 opacity-0 animate-slide-up stagger-1 tracking-tight">
+                    <span class="text-steel-500">&gt;</span> FREE_<span class="neon-text">LLM</span>_API
                 </h1>
-                <p class="text-xl text-gray-400 mb-8 opacity-0 animate-slide-up delay-100">
-                    一站式发现各种提供免费访问或试用额度的大语言模型服务
+                
+                <!-- Subtitle -->
+                <p class="text-lg text-steel-300 mb-8 opacity-0 animate-slide-up stagger-2 font-mono">
+                    <span class="text-neon-cyan">//</span> 发现免费大语言模型API资源<br>
+                    <span class="text-steel-500">为您的AI项目提供零成本解决方案</span>
                 </p>
                 
-                <div class="flex flex-wrap gap-3 opacity-0 animate-slide-up delay-200">
-                    <a href="#free-providers" class="inline-flex items-center gap-2 px-5 py-2.5 bg-dark-card rounded-lg border border-dark-border hover:border-accent-emerald text-base font-500 transition-colors">
-                        <svg class="w-5 h-5 text-accent-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                        </svg>
-                        免费提供商
+                <!-- CTA -->
+                <div class="flex flex-wrap gap-3 opacity-0 animate-slide-up stagger-3">
+                    <a href="#free-providers" class="btn-neon px-5 py-2.5 rounded font-mono text-sm">
+                        <span class="flex items-center gap-2">
+                            <span class="text-neon-green">[1]</span> 免费资源
+                        </span>
                     </a>
-                    <a href="#trial-providers" class="inline-flex items-center gap-2 px-5 py-2.5 bg-dark-card rounded-lg border border-dark-border hover:border-accent-amber text-base font-500 transition-colors">
-                        <svg class="w-5 h-5 text-accent-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        试用额度
+                    <a href="#trial-providers" class="btn-neon px-5 py-2.5 rounded font-mono text-sm">
+                        <span class="flex items-center gap-2">
+                            <span class="text-neon-amber">[2]</span> 试用额度
+                        </span>
                     </a>
+                </div>
+            </div>
+            
+            <!-- Terminal Info Panel -->
+            <div class="absolute top-24 right-8 hidden lg:block opacity-0 animate-fade-in stagger-4">
+                <div class="industrial-card corner-brackets rounded p-4 w-56">
+                    <div class="data-label mb-3">&gt; system_status</div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-steel-500">uptime:</span>
+                            <span class="text-neon-green font-mono">99.9%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-steel-500">providers:</span>
+                            <span class="text-white font-mono">25</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-steel-500">latency:</span>
+                            <span class="text-neon-cyan font-mono">~50ms</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-steel-500">status:</span>
+                            <span class="text-neon-green font-mono">ACTIVE</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Divider -->
+    <div class="divider-glow mx-4 max-w-7xl lg:mx-auto"></div>
+
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        
-        <!-- 搜索和筛选 -->
-        <section class="mb-10 opacity-0 animate-fade-in delay-200">
-            <div class="bg-dark-card rounded-xl border border-dark-border p-5 sm:p-6">
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="flex-1 relative">
-                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                        <input type="text" 
-                               id="searchInput" 
-                               placeholder="搜索提供商或模型名称..."
-                               class="w-full pl-12 pr-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-gray-200 placeholder-gray-500 focus-ring text-base">
+    <main class="relative px-4 py-10">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Search & Filter -->
+            <section class="mb-8 opacity-0 animate-slide-up stagger-3">
+                <div class="industrial-card corner-brackets rounded-lg p-4">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <!-- Search -->
+                        <div class="flex-1 relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-neon-cyan font-mono text-sm">&gt;</span>
+                            <input type="text" 
+                                   id="searchInput" 
+                                   placeholder="search_providers..."
+                                   class="w-full pl-8 pr-4 py-2.5 input-industrial rounded text-sm">
+                        </div>
+                        
+                        <!-- Filters -->
+                        <div class="flex gap-2">
+                            <button data-filter="all" class="btn-neon btn-active px-4 py-2.5 rounded font-mono text-xs">
+                                <span>ALL</span>
+                            </button>
+                            <button data-filter="free" class="btn-neon px-4 py-2.5 rounded font-mono text-xs">
+                                <span class="text-neon-green">FREE</span>
+                            </button>
+                            <button data-filter="trial" class="btn-neon px-4 py-2.5 rounded font-mono text-xs">
+                                <span class="text-neon-amber">TRIAL</span>
+                            </button>
+                        </div>
                     </div>
-                    
+                </div>
+            </section>
+            
+            <!-- Alert Cards -->
+            <section class="grid sm:grid-cols-2 gap-3 mb-8">
+                <div class="industrial-card rounded p-4 border-l-2 border-l-neon-cyan opacity-0 animate-slide-up stagger-4">
                     <div class="flex gap-3">
-                        <button data-filter="all" class="filter-btn active flex-1 sm:flex-none px-6 py-3 rounded-lg font-500 transition-all focus-ring">
-                            全部
-                        </button>
-                        <button data-filter="free" class="filter-btn flex-1 sm:flex-none px-6 py-3 rounded-lg font-500 transition-all focus-ring">
-                            免费
-                        </button>
-                        <button data-filter="trial" class="filter-btn flex-1 sm:flex-none px-6 py-3 rounded-lg font-500 transition-all focus-ring">
-                            试用
-                        </button>
+                        <div class="w-8 h-8 rounded bg-neon-cyan/10 flex items-center justify-center flex-shrink-0">
+                            <span class="font-mono text-neon-cyan text-sm">i</span>
+                        </div>
+                        <div>
+                            <div class="data-label mb-1">notice</div>
+                            <p class="text-sm text-steel-300">请合理使用免费资源，避免滥用导致服务不可用</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="industrial-card rounded p-4 border-l-2 border-l-neon-amber opacity-0 animate-slide-up stagger-5">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded bg-neon-amber/10 flex items-center justify-center flex-shrink-0">
+                            <span class="font-mono text-neon-amber text-sm">!</span>
+                        </div>
+                        <div>
+                            <div class="data-label mb-1">warning</div>
+                            <p class="text-sm text-steel-300">仅包含官方授权的合法服务</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <!-- 提示信息 -->
-        <section class="grid sm:grid-cols-2 gap-4 mb-10">
-            <div class="flex gap-3 p-4 bg-accent-cyan/5 border border-accent-cyan/20 rounded-lg">
-                <svg class="w-5 h-5 text-accent-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <div class="text-sm">
-                    <p class="font-600 text-white mb-1">温馨提示</p>
-                    <p class="text-gray-400">请合理使用这些免费资源，避免滥用</p>
+            <!-- Free Providers Section -->
+            <section id="free-providers" class="mb-12">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-8 h-8 rounded bg-neon-green/10 border border-neon-green/30 flex items-center justify-center">
+                        <span class="font-mono text-neon-green text-sm">01</span>
+                    </div>
+                    <div>
+                        <h2 class="font-mono text-lg font-600 text-white tracking-wider">FREE_PROVIDERS</h2>
+                        <span class="data-label">长期免费使用</span>
+                    </div>
                 </div>
-            </div>
-            <div class="flex gap-3 p-4 bg-accent-amber/5 border border-accent-amber/20 rounded-lg">
-                <svg class="w-5 h-5 text-accent-amber flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                </svg>
-                <div class="text-sm">
-                    <p class="font-600 text-white mb-1">重要声明</p>
-                    <p class="text-gray-400">本列表仅包含官方授权的合法服务</p>
+                <div id="freeProvidersGrid" class="provider-grid">
+                    <!-- Dynamic content -->
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 免费提供商 -->
-        <section id="free-providers" class="mb-14">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 bg-accent-emerald/10 rounded-lg flex items-center justify-center">
-                    <svg class="w-5 h-5 text-accent-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                    </svg>
+            <!-- Trial Providers Section -->
+            <section id="trial-providers" class="mb-12">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-8 h-8 rounded bg-neon-amber/10 border border-neon-amber/30 flex items-center justify-center">
+                        <span class="font-mono text-neon-amber text-sm">02</span>
+                    </div>
+                    <div>
+                        <h2 class="font-mono text-lg font-600 text-white tracking-wider">TRIAL_PROVIDERS</h2>
+                        <span class="data-label">注册赠送额度</span>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="font-display text-2xl font-700 text-white">免费提供商</h2>
-                    <p class="text-sm text-gray-500">长期免费使用</p>
+                <div id="trialProvidersGrid" class="provider-grid">
+                    <!-- Dynamic content -->
                 </div>
-            </div>
-            <div id="freeProvidersGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-                <!-- 动态生成 -->
-            </div>
-        </section>
-
-        <!-- 试用额度提供商 -->
-        <section id="trial-providers" class="mb-14">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 bg-accent-amber/10 rounded-lg flex items-center justify-center">
-                    <svg class="w-5 h-5 text-accent-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </div>
-                <div>
-                    <h2 class="font-display text-2xl font-700 text-white">试用额度提供商</h2>
-                    <p class="text-sm text-gray-500">注册赠送额度</p>
-                </div>
-            </div>
-            <div id="trialProvidersGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-                <!-- 动态生成 -->
-            </div>
-        </section>
-
+            </section>
+            
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-dark-border mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-                <p>
-                    基于 <a href="https://github.com/cheahjs/free-llm-api-resources" target="_blank" rel="noopener" class="text-accent-blue hover:text-accent-cyan transition-colors">free-llm-api-resources</a> 项目
-                </p>
-                <p>© 2026 免费 LLM API 资源 · 仅供学习参考</p>
+    <footer class="border-t border-steel-600/30 mt-10">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+                <div class="flex items-center gap-3">
+                    <span class="font-mono text-steel-500">&gt;</span>
+                    <span class="text-steel-400">based on</span>
+                    <a href="https://github.com/cheahjs/free-llm-api-resources" target="_blank" rel="noopener" class="text-neon-cyan hover:text-white transition-colors font-mono">free-llm-api-resources</a>
+                </div>
+                <div class="font-mono text-steel-500 text-xs">
+                    &copy; 2026 // for educational purposes only
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top fixed bottom-6 right-6 w-10 h-10 bg-void-100 border border-neon-cyan/50 rounded flex items-center justify-center text-neon-cyan hover:bg-neon-cyan/10 transition-colors z-50" aria-label="回到顶部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
+
     <script src="data.js"></script>
     <script>
-        // 渲染提供商卡片
+        // ===== Back to Top =====
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // ===== Render Provider Card =====
         function renderProviderCard(provider, type, index) {
             const card = document.createElement('article');
-            card.className = 'provider-card bg-dark-card rounded-xl border border-dark-border p-5 card-hover opacity-0';
+            card.className = 'industrial-card corner-brackets rounded p-4 opacity-0';
+            card.style.animation = `slideUp 0.5s ease-out forwards`;
             card.style.animationDelay = `${index * 0.05}s`;
-            card.style.animation = 'slideUp 0.5s ease-out forwards';
             card.dataset.type = type;
             card.dataset.name = provider.name.toLowerCase();
 
-            // 头部
+            // Header
             const header = document.createElement('div');
-            header.className = 'flex items-start justify-between gap-3 mb-4';
+            header.className = 'flex items-start justify-between gap-2 mb-3';
             
             const nameLink = document.createElement('a');
-            nameLink.className = 'font-display text-lg font-600 text-white hover:text-accent-blue transition-colors';
+            nameLink.className = 'font-mono text-sm font-600 text-white hover:text-neon-cyan transition-colors flex items-center gap-2';
             nameLink.href = provider.url;
             nameLink.target = '_blank';
             nameLink.rel = 'noopener noreferrer';
-            nameLink.textContent = provider.name;
+            nameLink.innerHTML = `<span class="text-neon-cyan">&gt;</span> ${provider.name}`;
             
             const badge = document.createElement('span');
-            badge.className = `flex-shrink-0 px-3 py-1 rounded-md text-sm font-600 ${
-                provider.badge === 'free' 
-                    ? 'bg-accent-emerald/15 text-accent-emerald' 
-                    : 'bg-accent-amber/15 text-accent-amber'
+            badge.className = `flex-shrink-0 px-2 py-0.5 rounded text-xs font-mono ${
+                provider.badge === 'free' ? 'tag-free' : 'tag-trial'
             }`;
-            badge.textContent = provider.badge === 'free' ? '免费' : '试用';
+            badge.textContent = provider.badge === 'free' ? 'FREE' : 'TRIAL';
             
             header.appendChild(nameLink);
             header.appendChild(badge);
             card.appendChild(header);
 
-            // 额度/限制信息
+            // Credits (Trial)
             if (provider.credits) {
                 const div = document.createElement('div');
-                div.className = 'mb-4 p-3 bg-dark-bg rounded-lg border-l-2 border-accent-amber';
+                div.className = 'mb-3 p-2 bg-void-50 border border-neon-amber/20 rounded';
                 div.innerHTML = `
-                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider mb-1">试用额度</div>
-                    <div class="text-sm text-gray-300">${provider.credits}</div>
+                    <div class="data-label mb-1">credits</div>
+                    <div class="data-value text-neon-amber">${provider.credits}</div>
                 `;
                 card.appendChild(div);
             }
 
+            // Limits (Free)
             if (provider.limits) {
                 const div = document.createElement('div');
-                div.className = 'mb-4 p-3 bg-dark-bg rounded-lg border-l-2 border-accent-emerald';
+                div.className = 'mb-3 p-2 bg-void-50 border border-neon-green/20 rounded';
                 const content = provider.limitsUrl 
-                    ? `<a href="${provider.limitsUrl}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">${provider.limits}</a>`
+                    ? `<a href="${provider.limitsUrl}" target="_blank" rel="noopener noreferrer" class="text-neon-green hover:text-white transition-colors">${provider.limits}</a>`
                     : provider.limits;
                 div.innerHTML = `
-                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider mb-1">使用限制</div>
-                    <div class="text-sm text-gray-300 leading-relaxed">${content}</div>
+                    <div class="data-label mb-1">limits</div>
+                    <div class="data-value text-sm">${content}</div>
                 `;
                 card.appendChild(div);
             }
 
-            // 限制表格 - 折叠展示
-            if (provider.limitsTable) {
+            // Limits Table
+            if (provider.limitsTable && provider.limitsTable.length > 0) {
                 const div = document.createElement('div');
-                div.className = 'mb-4 overflow-hidden rounded-lg border border-dark-border';
+                div.className = 'mb-3 overflow-hidden rounded border border-steel-600';
                 
-                const maxRows = 3;
+                const maxRows = 2;
                 const displayRows = provider.limitsTable.slice(0, maxRows);
                 const hiddenRows = provider.limitsTable.slice(maxRows);
                 const hasMore = hiddenRows.length > 0;
                 
                 let tableHTML = `
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="bg-dark-bg">
-                                    <th class="text-left py-2.5 px-3 font-600 text-gray-400">模型</th>
-                                    <th class="text-left py-2.5 px-3 font-600 text-gray-400">限制</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-dark-border">
+                    <table class="data-table w-full text-xs">
+                        <thead>
+                            <tr>
+                                <th class="text-left py-2 px-2">model</th>
+                                <th class="text-left py-2 px-2">limits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                 `;
                 
                 displayRows.forEach((row) => {
                     const modelName = row.url 
-                        ? `<a href="${row.url}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">${row.model}</a>`
+                        ? `<a href="${row.url}" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-white transition-colors">${row.model}</a>`
                         : row.model;
                     tableHTML += `
-                        <tr class="table-row-hover transition-colors">
-                            <td class="py-2.5 px-3 text-gray-300">${modelName}</td>
-                            <td class="py-2.5 px-3 text-gray-400">${row.limits}</td>
+                        <tr>
+                            <td class="py-1.5 px-2 text-steel-200">${modelName}</td>
+                            <td class="py-1.5 px-2 text-steel-400">${row.limits}</td>
                         </tr>
                     `;
                 });
                 
-                tableHTML += '</tbody></table></div>';
+                tableHTML += '</tbody></table>';
                 div.innerHTML = tableHTML;
                 
                 if (hasMore) {
                     const tbody = div.querySelector('tbody');
                     
                     const expandBtn = document.createElement('tr');
-                    expandBtn.className = 'cursor-pointer hover:bg-dark-hover transition-colors';
+                    expandBtn.className = 'cursor-pointer hover:bg-neon-cyan/5 transition-colors';
                     expandBtn.innerHTML = `
-                        <td colspan="2" class="py-2.5 px-3 text-center">
-                            <button class="text-accent-blue text-sm font-500 hover:text-accent-cyan transition-colors inline-flex items-center gap-1">
-                                <span class="expand-text">查看全部 ${provider.limitsTable.length} 个模型</span>
-                                <svg class="expand-icon w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <td colspan="2" class="py-2 px-2 text-center">
+                            <button class="text-neon-cyan text-xs font-mono hover:text-white transition-colors inline-flex items-center gap-1">
+                                <span class="expand-text">+${hiddenRows.length} more</span>
+                                <svg class="expand-icon w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </button>
@@ -379,17 +847,17 @@
                         isExpanded = !isExpanded;
                         
                         if (isExpanded) {
-                            hiddenRows.forEach((row, index) => {
+                            hiddenRows.forEach((row) => {
                                 const modelName = row.url 
-                                    ? `<a href="${row.url}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">${row.model}</a>`
+                                    ? `<a href="${row.url}" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-white transition-colors">${row.model}</a>`
                                     : row.model;
                                 
                                 const tr = document.createElement('tr');
-                                tr.className = 'table-row-hover transition-colors hidden-row';
+                                tr.className = 'hidden-row';
                                 tr.style.opacity = '0';
                                 tr.innerHTML = `
-                                    <td class="py-2.5 px-3 text-gray-300">${modelName}</td>
-                                    <td class="py-2.5 px-3 text-gray-400">${row.limits}</td>
+                                    <td class="py-1.5 px-2 text-steel-200">${modelName}</td>
+                                    <td class="py-1.5 px-2 text-steel-400">${row.limits}</td>
                                 `;
                                 
                                 tbody.insertBefore(tr, expandBtn);
@@ -398,10 +866,10 @@
                                 setTimeout(() => {
                                     tr.style.transition = 'opacity 0.2s ease';
                                     tr.style.opacity = '1';
-                                }, index * 30);
+                                }, 30);
                             });
                             
-                            this.querySelector('.expand-text').textContent = '收起';
+                            this.querySelector('.expand-text').textContent = 'collapse';
                             this.querySelector('.expand-icon').style.transform = 'rotate(180deg)';
                         } else {
                             hiddenRowsElements.forEach(tr => {
@@ -410,7 +878,7 @@
                             });
                             hiddenRowsElements.length = 0;
                             
-                            this.querySelector('.expand-text').textContent = `查看全部 ${provider.limitsTable.length} 个模型`;
+                            this.querySelector('.expand-text').textContent = `+${hiddenRows.length} more`;
                             this.querySelector('.expand-icon').style.transform = 'rotate(0deg)';
                         }
                     };
@@ -421,28 +889,21 @@
                 card.appendChild(div);
             }
 
-            // 备注 - 支持折叠
+            // Notes
             if (provider.notes) {
                 const div = document.createElement('div');
-                div.className = 'mb-4 p-3 bg-accent-cyan/5 border border-accent-cyan/15 rounded-lg text-sm text-gray-400 flex items-start gap-2';
+                div.className = 'mb-3 p-2 bg-void-50 border border-neon-cyan/10 rounded text-xs text-steel-400';
                 
                 const notesContent = provider.notes;
-                const maxChars = 100;
+                const maxChars = 60;
                 const needsCollapse = notesContent.length > maxChars;
                 
                 if (needsCollapse) {
                     const shortNotes = notesContent.substring(0, maxChars) + '...';
                     
                     div.innerHTML = `
-                        <svg class="w-4 h-4 text-accent-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <div class="flex-1">
-                            <span class="notes-text">${shortNotes}</span>
-                            <button class="notes-toggle text-accent-cyan hover:text-accent-blue font-500 ml-1 transition-colors">
-                                展开
-                            </button>
-                        </div>
+                        <span class="text-neon-cyan">//</span> <span class="notes-text">${shortNotes}</span>
+                        <button class="notes-toggle text-neon-cyan hover:text-white font-mono ml-1 transition-colors">[+]</button>
                     `;
                     
                     let isExpanded = false;
@@ -453,39 +914,30 @@
                         isExpanded = !isExpanded;
                         if (isExpanded) {
                             notesText.textContent = notesContent;
-                            this.textContent = '收起';
+                            this.textContent = '[-]';
                         } else {
                             notesText.textContent = shortNotes;
-                            this.textContent = '展开';
+                            this.textContent = '[+]';
                         }
                     };
                 } else {
-                    div.innerHTML = `
-                        <svg class="w-4 h-4 text-accent-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <span>${notesContent}</span>
-                    `;
+                    div.innerHTML = `<span class="text-neon-cyan">//</span> ${notesContent}`;
                 }
                 
                 card.appendChild(div);
             }
 
-            // 模型列表 - 折叠展示
+            // Models List
             if (provider.models && provider.models.length > 0) {
                 const div = document.createElement('div');
                 div.className = 'models-section';
                 
                 const titleDiv = document.createElement('div');
-                titleDiv.className = 'flex items-center justify-between mb-3';
-                titleDiv.innerHTML = `
-                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider">
-                        支持模型 <span class="text-accent-blue">(${provider.models.length})</span>
-                    </div>
-                `;
+                titleDiv.className = 'data-label mb-2';
+                titleDiv.innerHTML = `models <span class="text-neon-cyan">(${provider.models.length})</span>`;
                 
                 const list = document.createElement('div');
-                list.className = 'models-list flex flex-wrap gap-2';
+                list.className = 'flex flex-wrap gap-1';
                 
                 const maxVisible = 3;
                 const displayModels = provider.models.slice(0, maxVisible);
@@ -494,9 +946,9 @@
                 
                 displayModels.forEach(model => {
                     const tag = document.createElement('span');
-                    tag.className = 'px-3 py-1.5 bg-dark-bg rounded-md text-sm text-gray-400 cursor-default transition-colors hover:text-gray-300';
+                    tag.className = 'tag-model px-2 py-1 rounded';
                     if (model.url) {
-                        tag.innerHTML = `<a href="${model.url}" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">${model.name}</a>`;
+                        tag.innerHTML = `<a href="${model.url}" target="_blank" rel="noopener noreferrer" class="hover:text-neon-cyan transition-colors">${model.name}</a>`;
                     } else {
                         tag.textContent = model.name;
                     }
@@ -505,10 +957,8 @@
                 
                 if (hasMore) {
                     const btn = document.createElement('button');
-                    btn.className = 'px-3 py-1.5 bg-accent-blue/10 rounded-md text-sm text-accent-blue font-500 hover:bg-accent-blue/20 transition-colors';
-                    btn.innerHTML = `
-                        <span class="expand-text">+${hiddenModels.length} 更多</span>
-                    `;
+                    btn.className = 'tag-model px-2 py-1 rounded cursor-pointer hover:bg-neon-cyan/10';
+                    btn.innerHTML = `<span class="expand-text">+${hiddenModels.length}</span>`;
                     
                     let isExpanded = false;
                     const hiddenTags = [];
@@ -519,9 +969,9 @@
                         if (isExpanded) {
                             hiddenModels.forEach(model => {
                                 const tag = document.createElement('span');
-                                tag.className = 'px-3 py-1.5 bg-dark-bg rounded-md text-sm text-gray-400 cursor-default transition-colors hover:text-gray-300';
+                                tag.className = 'tag-model px-2 py-1 rounded';
                                 if (model.url) {
-                                    tag.innerHTML = `<a href="${model.url}" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">${model.name}</a>`;
+                                    tag.innerHTML = `<a href="${model.url}" target="_blank" rel="noopener noreferrer" class="hover:text-neon-cyan transition-colors">${model.name}</a>`;
                                 } else {
                                     tag.textContent = model.name;
                                 }
@@ -535,7 +985,7 @@
                                 }, 10);
                             });
                             
-                            this.querySelector('.expand-text').textContent = '收起';
+                            this.querySelector('.expand-text').textContent = '-';
                         } else {
                             hiddenTags.forEach(tag => {
                                 tag.style.opacity = '0';
@@ -543,7 +993,7 @@
                             });
                             hiddenTags.length = 0;
                             
-                            this.querySelector('.expand-text').textContent = `+${hiddenModels.length} 更多`;
+                            this.querySelector('.expand-text').textContent = `+${hiddenModels.length}`;
                         }
                     };
                     
@@ -555,13 +1005,12 @@
                 card.appendChild(div);
             }
 
-            // 模型链接
+            // Models Link
             if (provider.modelsLink) {
                 const div = document.createElement('div');
                 div.innerHTML = `
-                    <div class="text-xs font-500 text-gray-500 uppercase tracking-wider mb-2">支持模型</div>
-                    <a href="${provider.modelsLink.url || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 bg-dark-bg rounded-md text-sm text-accent-blue hover:text-accent-cyan transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="${provider.modelsLink.url || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-void-50 border border-neon-cyan/20 rounded text-xs text-neon-cyan hover:text-white hover:border-neon-cyan/50 transition-colors font-mono">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                         </svg>
                         ${provider.modelsLink.text}
@@ -573,7 +1022,7 @@
             return card;
         }
 
-        // 渲染所有提供商
+        // ===== Render All Providers =====
         function renderProviders() {
             const freeGrid = document.getElementById('freeProvidersGrid');
             const trialGrid = document.getElementById('trialProvidersGrid');
@@ -588,11 +1037,26 @@
             providersData.trial.forEach((provider, index) => {
                 trialGrid.appendChild(renderProviderCard(provider, 'trial', index));
             });
+            
+            // Update counts
+            document.getElementById('freeCount').textContent = providersData.free.length;
+            document.getElementById('trialCount').textContent = providersData.trial.length;
+            
+            // Calculate total models
+            let totalModels = 0;
+            providersData.free.forEach(p => {
+                if (p.models) totalModels += p.models.length;
+                if (p.limitsTable) totalModels += p.limitsTable.length;
+            });
+            providersData.trial.forEach(p => {
+                if (p.models) totalModels += p.models.length;
+            });
+            document.getElementById('modelCount').textContent = totalModels + '+';
         }
 
-        // 搜索功能
+        // ===== Search =====
         function handleSearch(searchTerm) {
-            const cards = document.querySelectorAll('.provider-card');
+            const cards = document.querySelectorAll('.industrial-card[data-type]');
             const term = searchTerm.toLowerCase().trim();
             
             cards.forEach(card => {
@@ -603,19 +1067,28 @@
             });
         }
 
-        // 筛选功能
+        // ===== Filter =====
         function handleFilter(filterType) {
             const freeSection = document.getElementById('free-providers');
             const trialSection = document.getElementById('trial-providers');
             
-            freeSection.style.display = filterType === 'trial' ? 'none' : '';
-            trialSection.style.display = filterType === 'free' ? 'none' : '';
+            if (filterType === 'trial') {
+                freeSection.style.display = 'none';
+                trialSection.style.display = 'block';
+            } else if (filterType === 'free') {
+                freeSection.style.display = 'block';
+                trialSection.style.display = 'none';
+            } else {
+                freeSection.style.display = 'block';
+                trialSection.style.display = 'block';
+            }
         }
 
-        // 初始化
+        // ===== Initialize =====
         document.addEventListener('DOMContentLoaded', function() {
             renderProviders();
             
+            // Search
             const searchInput = document.getElementById('searchInput');
             let debounceTimer;
             
@@ -624,27 +1097,14 @@
                 debounceTimer = setTimeout(() => handleSearch(e.target.value), 200);
             });
             
-            const filterButtons = document.querySelectorAll('.filter-btn');
+            // Filters
+            const filterButtons = document.querySelectorAll('[data-filter]');
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    filterButtons.forEach(b => {
-                        b.classList.remove('active', 'bg-accent-blue', 'text-white');
-                        b.classList.add('bg-dark-bg', 'text-gray-400');
-                    });
-                    this.classList.add('active', 'bg-accent-blue', 'text-white');
-                    this.classList.remove('bg-dark-bg', 'text-gray-400');
+                    filterButtons.forEach(b => b.classList.remove('btn-active'));
+                    this.classList.add('btn-active');
                     handleFilter(this.dataset.filter);
                 });
-            });
-            
-            // 设置初始状态
-            filterButtons.forEach(btn => {
-                if (btn.classList.contains('active')) {
-                    btn.classList.add('bg-accent-blue', 'text-white');
-                    btn.classList.remove('bg-dark-bg', 'text-gray-400');
-                } else {
-                    btn.classList.add('bg-dark-bg', 'text-gray-400');
-                }
             });
         });
     </script>
