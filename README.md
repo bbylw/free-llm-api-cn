@@ -3,6 +3,8 @@
 --->
 # 免费 LLM API 资源
 
+> 本文档基于 [free-llm-api-resources](https://github.com/cheahjs/free-llm-api-resources) 项目进行汉化不定期更新
+
 本文档列出了提供免费访问或 API 调用额度的各种 LLM 服务。
 
 > [!NOTE]  
